@@ -27,7 +27,7 @@ public class ManagerController {
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String homePage(ModelMap model) {
-        model.addAttribute("greeting", "Hi, Welcome to mysite");
+        model.addAttribute("greeting", "Hi, Welcome to loan application, please type loan amount");
         return PROCESS_PAGE;
     }
 

@@ -42,7 +42,9 @@
     <!--</bean>-->
     <!--&lt;!&ndash; job context &ndash;&gt;-->
 
-    <!--<bean id="runScheduler" class="com.ofg.loans.jobs.schedulers.RunScheduler" />-->
+    <!--<bean id="runScheduler" class="com.ofg.loans.jobs.schedulers.RunScheduler">-->
+        <!--<property name=""-->
+    <!--</bean>-->
 
     <!--&lt;!&ndash; Run every 5 seconds &ndash;&gt;-->
     <!--<task:scheduled-tasks>-->

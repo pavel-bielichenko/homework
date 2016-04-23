@@ -1,6 +1,5 @@
 package com.ofg.loans.risk;
 
-import com.ofg.loans.exceptions.RiskException;
 import com.ofg.loans.model.LoanApplication;
 
 /**
@@ -8,7 +7,7 @@ import com.ofg.loans.model.LoanApplication;
  */
 public abstract class RiskHandler {
 
-    RiskHandler nextSuccessor;
+    protected RiskHandler nextSuccessor;
 
     public void setNextSuccessor(RiskHandler nextSuccessor) {
         this.nextSuccessor = nextSuccessor;
@@ -19,5 +18,15 @@ public abstract class RiskHandler {
         return nextSuccessor;
     }
 
-    public abstract boolean handleRequest(LoanApplication loanApplication, RiskEnum risk);
+    public boolean checkLoanApplication(LoanApplication loanApplication){
+        if(!check(loanApplication)){
+            return false;
+        }
+        if(nextSuccessor != null){
+           return nextSuccessor.checkLoanApplication(loanApplication);
+        }
+        return true;
+    }
+
+    public abstract boolean check(LoanApplication loanApplication);
 }

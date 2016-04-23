@@ -48,3 +48,8 @@ body, #mainWrapper, .form-control{
 .login-form {
     padding: 10%;
 }
+
+.loan_form-actions {
+	width: 160;
+	float: right;
+}

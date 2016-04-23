@@ -5,6 +5,8 @@
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
 
+    <beans:import resource="datasource-config.xml"/>
+
     <http auto-config="true">
         <intercept-url pattern="/" access="hasRole('ADMIN') or hasRole('USER')"/>
         <form-login login-page="/login"
@@ -28,89 +30,10 @@
         <beans:property name="dao" ref="clientDao"/>
     </beans:bean>
 
-    <beans:bean name="clientDao" class="com.ofg.loans.dao.ClientDaoImpl" parent="abstractDao"/>
+    <beans:bean name="clientDao" class="com.ofg.loans.dao.clientDao.ClientDaoImpl" parent="abstractDao"/>
 
     <beans:bean name="abstractDao" class="com.ofg.loans.dao.AbstractDao" abstract="true">
         <beans:property name="sessionFactory" ref="sessionFactory"/>
     </beans:bean>
-
-    <beans:bean id="sessionFactory"
-                class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <beans:property name="dataSource" ref="dataSource"/>
-        <beans:property name="packagesToScan">
-            <beans:list>
-                <beans:value>com.ofg.loans.model</beans:value>
-            </beans:list>
-        </beans:property>
-        <beans:property name="hibernateProperties">
-            <beans:props>
-                <beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</beans:prop>
-                <beans:prop key="hibernate.show_sql">true</beans:prop>
-                <beans:prop key="format_sql">true</beans:prop>
-            </beans:props>
-        </beans:property>
-    </beans:bean>
-
-    <beans:bean id="dataSource"
-                class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <beans:property name="url" value="jdbc:mysql://localhost:3306/loans"/>
-        <beans:property name="username" value="root"/>
-        <beans:property name="password" value="1"/>
-    </beans:bean>
-
-    <beans:bean id="hibernateTransactionManager"
-          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <beans:property name="sessionFactory" ref="sessionFactory" />
-    </beans:bean>
-
-
-    <!--&lt;!&ndash;TASKLET JOB&ndash;&gt;-->
-    <!--<batch:job id="ClientLoanDetailsCleaner">-->
-        <!--<batch:step id="clean_old_data">-->
-            <!--<batch:tasklet>-->
-                <!--<beans:bean parent="loanTasklet">-->
-                    <!--<beans:property name="queries">-->
-                        <!--<util:list list-class="java.util.ArrayList" value-type="java.lang.String">-->
-                            <!--<beans:value>${job.tasklet.executor.query}</beans:value>-->
-                        <!--</util:list>-->
-                    <!--</beans:property>-->
-                <!--</beans:bean>-->
-            <!--</batch:tasklet>-->
-        <!--</batch:step>-->
-    <!--</batch:job>-->
-
-    <!--&lt;!&ndash; job context &ndash;&gt;-->
-    <!--<beans:bean id="jobRepository"-->
-          <!--class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">-->
-        <!--<beans:property name="transactionManager" ref="transactionManager"/>-->
-    <!--</beans:bean>-->
-
-    <!--<beans:bean id="transactionManager"-->
-          <!--class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />-->
-
-    <!--<beans:bean id="jobLauncher"-->
-          <!--class="org.springframework.batch.core.launch.support.SimpleJobLauncher">-->
-        <!--<beans:property name="jobRepository" ref="jobRepository" />-->
-    <!--</beans:bean>-->
-    <!--&lt;!&ndash; job context &ndash;&gt;-->
-
-    <!--<beans:bean id="runScheduler" class="com.ofg.loans.jobs.schedulers.RunScheduler" />-->
-
-    <!--&lt;!&ndash; Run every 5 seconds &ndash;&gt;-->
-    <!--<task:scheduled-tasks>-->
-        <!--&lt;!&ndash;-->
-        <!--<task:scheduled ref="runScheduler" method="run" fixed-delay="5000" />-->
-        <!--&ndash;&gt;-->
-        <!--<task:scheduled ref="runScheduler" method="run" cron="*/5 * * * * *" />-->
-    <!--</task:scheduled-tasks>-->
-
-    <!--<beans:bean abstract="true" id="loanTasklet" class="com.ofg.loans.jobs.LoanTasklet">-->
-        <!--<beans:property name="jdbc" ref="JdbcTemplate"/>-->
-    <!--</beans:bean>-->
-
-    <!--<beans:bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
-        <!--<beans:property name="dataSource" ref="dataSource"/>-->
-    <!--</beans:bean>-->
 
 </beans:beans>

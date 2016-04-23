@@ -22,7 +22,7 @@ public class ClientLoanDetails {
     private String ip;
 
     @Column(name = "loan_request_date", nullable = false)
-    private Date loanRequest;
+    private Date loanApplicationDate;
 
     @Column(name = "request_count", nullable = false)
     private Integer count;
@@ -51,12 +51,12 @@ public class ClientLoanDetails {
         this.ip = ip;
     }
 
-    public Date getLoanRequest() {
-        return loanRequest;
+    public Date getLoanApplicationDate() {
+        return loanApplicationDate;
     }
 
-    public void setLoanRequest(Date loanRequest) {
-        this.loanRequest = loanRequest;
+    public void setLoanApplicationDate(Date loanApplicationDate) {
+        this.loanApplicationDate = loanApplicationDate;
     }
 
     public Integer getCount() {

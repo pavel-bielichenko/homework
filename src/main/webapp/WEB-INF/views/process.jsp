@@ -13,27 +13,32 @@
   <div class="login-container">
     <div class="login-card">
       <div class="login-form">
-Greeting : ${greeting}
-This is a welcome page.
+      ${greeting}
 
 <c:url var="requestLoanURL" value="/requestLoan" />
 <form action="${requestLoanURL}" method="post" class="form-horizontal">
   <c:if test="${param.error != null}">
     <div class="alert alert-danger">
-      <p>Invalid username and password.</p>
+      <p>Sorry, but you request loan with a maximum amount in time range between 00:00 - 06:00
+        or the maximum number of loan applications from your IP today has been exceeded</p>
+    </div>
+  </c:if>
+  <c:if test="${param.success != null}">
+    <div class="alert alert-success">
+      <p>Your loan request has been approved!</p>
     </div>
   </c:if>
 
   <div class="input-group input-sm">
-    <label class="input-group-addon" for="loan_amount"><i class="fa fa-user"></i></label>
+    <label class="input-group-addon" for="loan_amount"><i class="fa fa-btc" aria-hidden="true"></i></label>
     <input type="text" class="form-control" id="loan_amount" name="loan_amount" placeholder="Enter loan" required>
   </div>
 
   <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
 
-  <div class="form-actions">
+  <div class="loan_form-actions">
     <input type="submit"
-           class="btn btn-block btn-primary btn-default" value="get loan">
+           class="btn btn-block btn-primary btn-default" value="send loan application">
   </div>
 </form>
         </div>

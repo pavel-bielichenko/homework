@@ -2,7 +2,6 @@ package com.ofg.loans.services;
 
 import com.ofg.loans.dao.clientDao.ClientDao;
 import com.ofg.loans.dao.clientLoanDetailsDao.ClientLoanDetailsDao;
-import com.ofg.loans.dao.loanDao.LoanApplicationDao;
 import com.ofg.loans.model.Client;
 import com.ofg.loans.model.ClientLoanDetails;
 import com.ofg.loans.model.LoanApplication;
@@ -65,7 +64,7 @@ public class OperationService {
         newDetails.setUsername(username);
         newDetails.setIp(loanApplication.getIp());
         newDetails.setCount(1);
-        newDetails.setLoanRequest(new Date());
+        newDetails.setLoanApplicationDate(new Date());
         clientLoanDao.persist(newDetails);
     }
 
