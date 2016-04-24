@@ -1,5 +1,6 @@
 package com.ofg.loans.controllers;
 
+import com.ofg.loans.model.LoanApplication;
 import com.ofg.loans.services.OperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,13 +23,11 @@ public class OperationController {
     private OperationService operationService;
 
     @RequestMapping(value = {"/requestLoan"}, method = RequestMethod.POST)
-    public String requestLoan(@RequestParam(value = "loan_amount", required = false) Long loan_amount, HttpServletRequest request, ModelMap model){
-        if(operationService.processLoan(operationService.createLoanApplication(loan_amount, request.getRemoteAddr()))){
-            model.addAttribute("success", "success");
-            return PROCESS_PAGE;
-        } else{
-            model.addAttribute("error", "error");
-            return PROCESS_PAGE;
-        }
+    public String requestLoan(@RequestParam(value = "loan_amount", required = false) Long loan_amount, HttpServletRequest request, ModelMap model) {
+        LoanApplication loanApplication = operationService.createLoanApplication(loan_amount, request.getRemoteAddr());
+
+        model.addAttribute("success", operationService.processLoan(loanApplication));
+
+        return PROCESS_PAGE;
     }
 }

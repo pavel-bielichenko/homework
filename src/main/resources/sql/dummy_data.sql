@@ -52,19 +52,20 @@ CREATE TABLE `loans`.`client_loan_application` (
 );
 
 CREATE TABLE `loans`.`client_loan_details` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '',
   `username` VARCHAR(45) NOT NULL COMMENT '',
   `ip` VARCHAR(45) NOT NULL COMMENT '',
   `loan_request_date` DATETIME NOT NULL COMMENT '',
   `request_count` INT NOT NULL COMMENT '',
-  PRIMARY KEY (`username`)  COMMENT '');
+  PRIMARY KEY (`id`)  COMMENT '');
 
-ALTER TABLE `loans`.`client_loan_details`
-ADD COLUMN `id` BIGINT(20) NOT NULL COMMENT '' AFTER `request_count`,
-DROP PRIMARY KEY,
-ADD PRIMARY KEY (`id`)  COMMENT '';
-
-ALTER TABLE `loans`.`client_loan_details`
-CHANGE COLUMN `id` `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '' ;
+# ALTER TABLE `loans`.`client_loan_details`
+# ADD COLUMN `id` BIGINT(20) NOT NULL COMMENT '' AFTER `request_count`,
+# DROP PRIMARY KEY,
+# ADD PRIMARY KEY (`id`)  COMMENT '';
+#
+# ALTER TABLE `loans`.`client_loan_details`
+# CHANGE COLUMN `id` `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '' ;
 
 
 /* Populate USER_PROFILE Table */

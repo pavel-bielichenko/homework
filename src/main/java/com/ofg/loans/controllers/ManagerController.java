@@ -51,7 +51,7 @@ public class ManagerController {
         return LOGOUT_PAGE;
     }
 
-    private String getPrincipal() {
+    protected String getPrincipal() {
         String userName = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 

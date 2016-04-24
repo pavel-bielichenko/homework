@@ -17,13 +17,13 @@
 
 <c:url var="requestLoanURL" value="/requestLoan" />
 <form action="${requestLoanURL}" method="post" class="form-horizontal">
-  <c:if test="${param.error != null}">
+  <c:if test="${param.success == false}">
     <div class="alert alert-danger">
       <p>Sorry, but you request loan with a maximum amount in time range between 00:00 - 06:00
         or the maximum number of loan applications from your IP today has been exceeded</p>
     </div>
   </c:if>
-  <c:if test="${param.success != null}">
+  <c:if test="${param.success == true}">
     <div class="alert alert-success">
       <p>Your loan request has been approved!</p>
     </div>

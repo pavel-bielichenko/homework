@@ -4,13 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.ofg.loans.dao.clientLoanDetailsDao.ClientLoanDetailsDao;
-import com.ofg.loans.dao.clientLoanDetailsDao.ClientLoanDetailsDaoImpl;
 import com.ofg.loans.model.ClientLoanDetails;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -27,7 +21,8 @@ public class RunScheduler {
     @Autowired
     private ClientLoanDetailsDao clientLoanDetailsDao;
 
-    @Scheduled(fixedDelay = 60 * 1000)
+    // Run every 10 minutes
+    @Scheduled(fixedDelay = 60000)
     @Transactional
     public void run() {
         try {
